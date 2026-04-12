@@ -3,68 +3,377 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Soporte y Privacidad - Volado Maestro</title>
+    <title>Volado Maestro | Flip Coin Master</title>
     <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: #09090b;
-            color: #ffffff;
-            line-height: 1.6;
+        :root {
+            --bg-dark: #0a0a0a;
+            --text-gold: #e3d5a5;
+            --text-gray: #888888;
+            --text-light: #e0e0e0;
+            --accent-gold: #c3ae71;
+            --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            --transition-speed: 0.4s;
+        }
+
+        * {
+            box-sizing: border-box;
             margin: 0;
-            padding: 40px 20px;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            display: flex;
+            justify-content: center;
+        }
+
+        .main-container {
+            width: 100%;
+            max-width: 1200px;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
+            padding: 20px;
+        }
+
+        /* HEADER */
+        header {
+            display: flex;
+            justify-content: space-between;
             align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            margin-bottom: 40px;
         }
-        .container {
-            max-width: 600px;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.03);
-            padding: 40px;
-            border-radius: 24px;
-            border: 1px border rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
+
+        .logo-container img {
+            height: 40px;
+            object-fit: contain;
         }
-        h1 { color: #e3d5a5; margin-bottom: 30px; font-size: 28px; }
-        h2 { color: #e3d5a5; margin-top: 40px; font-size: 20px; }
-        p { color: rgba(255, 255, 255, 0.7); font-size: 16px; }
-        .contact-btn {
-            display: inline-block;
-            background: #e3d5a5;
-            color: #000;
-            padding: 12px 30px;
-            border-radius: 12px;
+
+        .header-nav a {
+            color: var(--text-gold);
             text-decoration: none;
-            font-weight: bold;
-            margin-top: 20px;
+            font-size: 16px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .header-nav a:hover {
+            color: #fff;
+        }
+
+        /* HERO SECTION */
+        .hero-section {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        @media (min-width: 768px) {
+            .hero-section {
+                flex-direction: row;
+                align-items: flex-start;
+            }
+        }
+
+        .app-downloads {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        .app-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 18px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .store-badges {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .store-badge {
+            height: 35px;
+            cursor: pointer;
             transition: transform 0.2s;
         }
-        .contact-btn:hover { transform: scale(1.05); }
-        .footer { margin-top: 40px; font-size: 12px; color: rgba(255, 255, 255, 0.3); }
+
+        .store-badge:hover {
+            transform: scale(1.05);
+        }
+
+        .store-badge.coming-soon {
+            opacity: 0.5;
+            filter: grayscale(100%);
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        .app-description {
+            flex-grow: 1;
+            font-size: 15px;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        .app-description p {
+            margin-bottom: 15px;
+        }
+
+        /* CAROUSEL TABS */
+        .os-tabs {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .os-tab {
+            background: none;
+            border: none;
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-gray);
+            cursor: pointer;
+            padding-bottom: 5px;
+            transition: color 0.3s;
+        }
+
+        .os-tab.active {
+            color: var(--text-gold);
+        }
+
+        /* CAROUSEL CONTAINER */
+        .carousel-wrapper {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 9; /* Ajustable dependiendo de tu imagen */
+            background: #111;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+        }
+        
+        @media (max-width: 768px) {
+             .carousel-wrapper {
+                 aspect-ratio: 4 / 3;
+             }
+        }
+
+        .carousel-track {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            transition: transform var(--transition-speed) ease-in-out;
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* DOTS */
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+            padding-bottom: 40px;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .dot.active {
+            background: #fff;
+        }
+
+        /* FOOTER */
+        footer {
+            margin-top: auto;
+            text-align: center;
+            padding: 20px 0;
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.3);
+            letter-spacing: 1px;
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Volado Maestro - Soporte</h1>
-        <p>¿Tienes dudas, sugerencias o necesitas ayuda con la aplicación? Estamos aquí para ayudarte a que tu experiencia sea la mejor.</p>
+
+    <div class="main-container">
+        <!-- HEADER -->
+        <header>
+            <div class="logo-container">
+                <!-- LOGO COMPUESTO "Volado Maestro | Flip Coin Master" -->
+                <img src="assets/images/logo.png" alt="Volado Maestro / Flip Coin Master Logo" id="main-logo">
+            </div>
+            <div class="header-nav">
+                <a href="privacy.html">Política de Privacidad</a>
+            </div>
+        </header>
+
+        <!-- HERO SECTION -->
+        <main>
+            <section class="hero-section">
+                <div class="app-downloads">
+                    <img src="assets/images/icon.png" alt="Volado Maestro Icon" class="app-icon" onerror="this.style.display='none'">
+                    <div class="store-badges">
+                        <a href="#" onclick="alert('¡Estará disponible muy pronto! La aplicación se encuentra actualmente en la fila final de revisión de Google y Apple.'); return false;">
+                            <img src="assets/images/badge-google.png" alt="Get it on Google Play" class="store-badge coming-soon" onerror="this.style.display='none'">
+                        </a>
+                        <!-- Reemplaza el # por el link final de App Store cuando te lo aprueben -->
+                        <a href="#" onclick="alert('¡Estará disponible muy pronto! La aplicación se encuentra actualmente en la fila final de revisión de Google y Apple.'); return false;">
+                            <img src="assets/images/badge-apple.png" alt="Download on the App Store" class="store-badge coming-soon" onerror="this.style.display='none'">
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="app-description">
+                    <p>Imagina echar un volado con una moneda de 5 pesos e inmediatamente después con un Penny de USA, un Euro, un Yen Japonés o hasta con una moneda histórica del reinado de Alejandro Magno y finalizar con una deliciosa moneda de chocolate... todo eso y más lo puedes hacer con esta app, horas y horas de sana diversión garantizada.</p>
+                    <p>Desde el principio tienes 10 monedas disponibles y puedes desbloquear 20 más al visualizar un breve video y quedarte la moneda en tu inventario para siempre, pero ese es apenas el comienzo, puedes crear y subir tus propias monedas también... da rienda suelta a tu imaginación con Volado Maestro.</p>
+                </div>
+            </section>
+
+            <!-- TABS & CAROUSEL -->
+            <section class="gallery-section">
+                <div class="os-tabs">
+                    <button class="os-tab active" onclick="switchOS('ios')">iOS</button>
+                    <button class="os-tab" onclick="switchOS('android')">Android</button>
+                </div>
+
+                <div class="carousel-wrapper">
+                    <div class="carousel-track" id="carouselTrack">
+                        <!-- Las imágenes se insertarán aquí con JavaScript -->
+                    </div>
+                </div>
+
+                <div class="carousel-dots" id="carouselDots">
+                    <!-- Los círculos se insertarán aquí con JavaScript -->
+                </div>
+            </section>
+        </main>
+
+        <!-- FOOTER -->
+        <footer>
+            © 2026 G BRAND APPS • VOLADO MAESTRO
+        </footer>
+    </div>
+
+    <script>
+        // Configuración de Imágenes
+        const TOTAL_SLIDES = 6;
+        let currentOS = 'ios';
+        let currentIndex = 0;
+        let autoPlayInterval;
+
+        const track = document.getElementById('carouselTrack');
+        const dotsContainer = document.getElementById('carouselDots');
         
-        <a href="mailto:g.brandramos@gmail.com" class="contact-btn">Contactar Soporte</a>
+        // Inicializar el slider
+        function initSlider() {
+            renderSlides();
+            renderDots();
+            goToSlide(0);
+            startAutoPlay();
+        }
 
-        <h2>Política de Privacidad</h2>
-        <p>En <strong>Volado Maestro</strong>, respetamos tu privacidad:</p>
-        <ul>
-            <li>No recolectamos datos personales identificables.</li>
-            <li>No compartimos información con terceros.</li>
-            <li>Las monedas personalizadas se guardan localmente en tu dispositivo.</li>
-            <li>Usamos Google AdMob para mostrar anuncios básicos que sostienen la app.</li>
-        </ul>
+        // Renderizar las imágenes al HTML (ej: assets/images/ios/1.jpg)
+        function renderSlides() {
+            track.innerHTML = '';
+            for(let i = 1; i <= TOTAL_SLIDES; i++) {
+                const slide = document.createElement('div');
+                slide.className = 'carousel-slide';
+                // Cambiado a .png a petición tuya
+                slide.innerHTML = `<img src="assets/images/${currentOS}/${i}.png" alt="${currentOS} screenshot ${i}" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiMzMyMiLz48dGV4dCB4PSI1MCUiIHk9IjUwJSIgZmlsbD0iI2ZmZiIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjQiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkltYWdlbiAke2l9ICgke2N1cnJlbnRPUy50b1VwcGVyQ2FzZSgpfSk8L3RleHQ+PC9zdmc+'">`;
+                track.appendChild(slide);
+            }
+        }
 
-        <h2>Términos y Condiciones</h2>
-        <p>Volado Maestro es una herramienta de entretenimiento para la toma de decisiones al azar. El uso de la app es bajo responsabilidad del usuario.</p>
-    </div>
+        // Renderizar los puntitos inferiores
+        function renderDots() {
+            dotsContainer.innerHTML = '';
+            for(let i = 0; i < TOTAL_SLIDES; i++) {
+                const dot = document.createElement('div');
+                dot.className = 'dot';
+                dot.onclick = () => {
+                    goToSlide(i);
+                    resetAutoPlay(); // Reiniciar el contador si el usuario hace clic manually
+                };
+                dotsContainer.appendChild(dot);
+            }
+        }
 
-    <div class="footer">
-        © 2026 G brand Apps • Volado Maestro
-    </div>
+        // Cambiar entre iOS / Android
+        function switchOS(os) {
+            if (currentOS === os) return;
+            currentOS = os;
+            
+            // Actualizar clases de botones
+            document.querySelectorAll('.os-tab').forEach(tab => {
+                tab.classList.remove('active');
+                if(tab.innerText.toLowerCase() === os) {
+                    tab.classList.add('active');
+                }
+            });
+
+            // Reiniciar con las nuevas imágenes
+            initSlider();
+        }
+
+        // Mover a una diapositiva específica
+        function goToSlide(index) {
+            currentIndex = index;
+            track.style.transform = `translateX(-${currentIndex * 100}%)`;
+            
+            // Actualizar puntitos
+            const dots = document.querySelectorAll('.dot');
+            dots.forEach(d => d.classList.remove('active'));
+            if(dots[currentIndex]) {
+                dots[currentIndex].classList.add('active');
+            }
+        }
+
+        // Avanzar automáticamente
+        function startAutoPlay() {
+            clearInterval(autoPlayInterval);
+            autoPlayInterval = setInterval(() => {
+                let nextIndex = currentIndex + 1;
+                if (nextIndex >= TOTAL_SLIDES) nextIndex = 0;
+                goToSlide(nextIndex);
+            }, 3000); // 3 segundos (cambiado a 3 para que rinda más la lectura)
+        }
+
+        // Reiniciar el timer cuando el usuario interactúa
+        function resetAutoPlay() {
+            startAutoPlay();
+        }
+
+        // Arrancar al cargar la página
+        window.onload = initSlider;
+    </script>
 </body>
 </html>
