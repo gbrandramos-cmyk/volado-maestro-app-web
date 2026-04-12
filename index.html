@@ -307,8 +307,8 @@
             for(let i = 1; i <= TOTAL_SLIDES; i++) {
                 const slide = document.createElement('div');
                 slide.className = 'carousel-slide';
-                // Cambiado a .png a petición tuya
-                slide.innerHTML = `<img src="assets/images/${currentOS}/${i}.png" alt="${currentOS} screenshot ${i}" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiMzMyMiLz48dGV4dCB4PSI1MCUiIHk9IjUwJSIgZmlsbD0iI2ZmZiIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjQiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkltYWdlbiAke2l9ICgke2N1cnJlbnRPUy50b1VwcGVyQ2FzZSgpfSk8L3RleHQ+PC9zdmc+'">`;
+                // Volvimos a .jpg para optimización de peso web
+                slide.innerHTML = `<img src="assets/images/${currentOS}/${i}.jpg" alt="${currentOS} screenshot ${i}" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiMzMyMiLz48dGV4dCB4PSI1MCUiIHk9IjUwJSIgZmlsbD0iI2ZmZiIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjQiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkltYWdlbiAke2l9ICgke2N1cnJlbnRPUy50b1VwcGVyQ2FzZSgpfSk8L3RleHQ+PC9zdmc+'">`;
                 track.appendChild(slide);
             }
         }
