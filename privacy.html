@@ -5,24 +5,62 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Política de Privacidad - Volado Maestro</title>
     <style>
+        :root {
+            --bg-dark: #0a0a0a;
+            --text-gold: #e3d5a5;
+            --text-gray: #888888;
+            --text-light: #e0e0e0;
+            --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: #09090b;
+            font-family: var(--font-family);
+            background-color: var(--bg-dark);
             color: #ffffff;
             line-height: 1.6;
             margin: 0;
-            padding: 60px 20px;
+            padding: 0 20px 60px 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
+
+        /* HEADER */
+        header {
+            width: 100%;
+            max-width: 1200px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            margin-bottom: 40px;
+        }
+
+        .logo-container img {
+            height: 40px;
+            object-fit: contain;
+        }
+
+        .header-nav a {
+            color: var(--text-gold);
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .header-nav a:hover {
+            color: #fff;
+        }
+
         .container {
             max-width: 800px;
             width: 100%;
             background: rgba(255, 255, 255, 0.03);
-            padding: 60px;
+            padding: 40px;
             border-radius: 32px;
-            border: 1px border rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
         }
         h1 { color: #e3d5a5; margin-bottom: 40px; font-size: 32px; font-weight: 800; border-bottom: 2px solid #e3d5a5; padding-bottom: 10px; }
@@ -34,6 +72,18 @@
     </style>
 </head>
 <body>
+    <!-- HEADER -->
+    <header>
+        <div class="logo-container">
+            <a href="index.html">
+                <img src="assets/images/logo.png" alt="Volado Maestro Logo">
+            </a>
+        </div>
+        <div class="header-nav">
+            <a href="index.html" style="margin-right: 20px;">Inicio</a>
+            <a href="privacy.html">Política de Privacidad</a>
+        </div>
+    </header>
     <div class="container">
         <h1>Política de Privacidad</h1>
         <p>Última actualización: 1 de abril de 2026</p>
