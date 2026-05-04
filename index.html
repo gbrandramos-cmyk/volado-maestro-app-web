@@ -53,6 +53,12 @@
             object-fit: contain;
         }
 
+        .header-nav {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
         .header-nav a {
             color: var(--text-gold);
             text-decoration: none;
@@ -63,6 +69,17 @@
 
         .header-nav a:hover {
             color: #fff;
+        }
+
+        .lang-switch {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid var(--accent-gold);
+            color: var(--text-gold);
+            padding: 4px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
         }
 
         /* HERO SECTION */
@@ -111,13 +128,6 @@
             transform: scale(1.05);
         }
 
-        .store-badge.coming-soon {
-            opacity: 0.5;
-            filter: grayscale(100%);
-            cursor: not-allowed;
-            transform: none !important;
-        }
-
         .app-description {
             flex-grow: 1;
             font-size: 15px;
@@ -155,7 +165,7 @@
         .carousel-wrapper {
             position: relative;
             width: 100%;
-            aspect-ratio: 16 / 9; /* Ajustable dependiendo de tu imagen */
+            aspect-ratio: 16 / 9;
             background: #111;
             border-radius: 12px;
             overflow: hidden;
@@ -228,12 +238,12 @@
         <!-- HEADER -->
         <header>
             <div class="logo-container">
-                <!-- LOGO COMPUESTO "Volado Maestro | Flip Coin Master" -->
-                <img src="assets/images/logo.png" alt="Volado Maestro / Flip Coin Master Logo" id="main-logo">
+                <img src="assets/images/logo.png" alt="Logo" id="main-logo">
             </div>
             <div class="header-nav">
-                <a href="index.html" style="margin-right: 20px;">Inicio</a>
-                <a href="privacy.html">Política de Privacidad</a>
+                <a href="index.html" id="nav-home">Inicio</a>
+                <a href="privacy.html" id="nav-privacy">Privacidad</a>
+                <button class="lang-switch" onclick="toggleLanguage()" id="lang-btn">EN</button>
             </div>
         </header>
 
@@ -241,21 +251,19 @@
         <main>
             <section class="hero-section">
                 <div class="app-downloads">
-                    <img src="assets/images/icono.png" alt="Volado Maestro Icon" class="app-icon" onerror="this.style.display='none'">
+                    <img src="assets/images/icono.png" alt="Icon" class="app-icon" onerror="this.style.display='none'">
                     <div class="store-badges">
-                        <a href="#" onclick="alert('¡Estará disponible muy pronto! La aplicación se encuentra actualmente en la fila final de revisión de Google y Apple.'); return false;">
-                            <img src="assets/images/badge-google.png" alt="Get it on Google Play" class="store-badge coming-soon" onerror="this.style.display='none'">
+                        <a href="https://play.google.com/store/apps/details?id=com.volado.maestro" target="_blank">
+                            <img src="assets/images/badge-google.png" alt="Google Play" class="store-badge" onerror="this.style.display='none'">
                         </a>
-                        <!-- Link directo a la App Store -->
                         <a href="https://apps.apple.com/us/app/flip-coin-master/id6761403004" target="_blank">
-                            <img src="assets/images/badge-apple.png" alt="Download on the App Store" class="store-badge" onerror="this.style.display='none'">
+                            <img src="assets/images/badge-apple.png" alt="App Store" class="store-badge" onerror="this.style.display='none'">
                         </a>
                     </div>
                 </div>
                 
-                <div class="app-description">
-                    <p>Imagina echar un volado con una moneda de 5 pesos e inmediatamente después con un Penny de USA, un Euro, un Yen Japonés o hasta con una moneda histórica del reinado de Alejandro Magno y finalizar con una deliciosa moneda de chocolate... todo eso y más lo puedes hacer con esta app, horas y horas de sana diversión garantizada.</p>
-                    <p>Desde el principio tienes 10 monedas disponibles y puedes desbloquear 20 más al visualizar un breve video y quedarte la moneda en tu inventario para siempre, pero ese es apenas el comienzo, puedes crear y subir tus propias monedas también... da rienda suelta a tu imaginación con Volado Maestro.</p>
+                <div class="app-description" id="app-desc">
+                    <!-- Textos dinámicos aquí -->
                 </div>
             </section>
 
@@ -267,24 +275,70 @@
                 </div>
 
                 <div class="carousel-wrapper">
-                    <div class="carousel-track" id="carouselTrack">
-                        <!-- Las imágenes se insertarán aquí con JavaScript -->
-                    </div>
+                    <div class="carousel-track" id="carouselTrack"></div>
                 </div>
 
-                <div class="carousel-dots" id="carouselDots">
-                    <!-- Los círculos se insertarán aquí con JavaScript -->
-                </div>
+                <div class="carousel-dots" id="carouselDots"></div>
             </section>
         </main>
 
-        <!-- FOOTER -->
-        <footer>
+        <footer id="footer-text">
             © 2026 G BRAND APPS • VOLADO MAESTRO
         </footer>
     </div>
 
     <script>
+        const translations = {
+            es: {
+                title: "Volado Maestro | Flip Coin Master",
+                navHome: "Inicio",
+                navPrivacy: "Privacidad",
+                langBtn: "EN",
+                desc: `
+                    <p>Imagina echar un volado con una moneda de 5 pesos e inmediatamente después con un Penny de USA, un Euro, un Yen Japonés o hasta con una moneda histórica del reinado de Alejandro Magno y finalizar con una deliciosa moneda de chocolate... todo eso y más lo puedes hacer con esta app, horas y horas de sana diversión garantizada.</p>
+                    <p>Desde el principio tienes 10 monedas disponibles y puedes desbloquear 20 más al visualizar un breve video y quedarte la moneda en tu inventario para siempre, pero ese es apenas el comienzo, puedes crear y subir tus propias monedas también... da rienda suelta a tu imaginación con Volado Maestro.</p>
+                `,
+                footer: "© 2026 G BRAND APPS • VOLADO MAESTRO"
+            },
+            en: {
+                title: "Flip Coin Master | Volado Maestro",
+                navHome: "Home",
+                navPrivacy: "Privacy",
+                langBtn: "ES",
+                desc: `
+                    <p>Imagine tossing a 5-peso coin and immediately after a US Penny, a Euro, a Japanese Yen or even a historical coin from the reign of Alexander the Great, and finishing with a delicious chocolate coin... all that and more you can do with this app, hours and hours of healthy fun guaranteed.</p>
+                    <p>From the start you have 10 coins available and you can unlock 20 more by watching a short video and keep the coin in your inventory forever, but that's just the beginning, you can also create and upload your own coins... let your imagination run wild with Flip Coin Master.</p>
+                `,
+                footer: "© 2026 G BRAND APPS • FLIP COIN MASTER"
+            }
+        };
+
+        let currentLang = 'es';
+
+        function initLanguage() {
+            const browserLang = navigator.language || navigator.userLanguage;
+            currentLang = browserLang.startsWith('es') ? 'es' : 'en';
+            applyLanguage();
+        }
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'es' ? 'en' : 'es';
+            applyLanguage();
+        }
+
+        function applyLanguage() {
+            const t = translations[currentLang];
+            document.title = t.title;
+            document.getElementById('nav-home').innerText = t.navHome;
+            document.getElementById('nav-privacy').innerText = t.navPrivacy;
+            document.getElementById('lang-btn').innerText = t.langBtn;
+            document.getElementById('app-desc').innerHTML = t.desc;
+            document.getElementById('footer-text').innerText = t.footer;
+            
+            // Re-inicializar slider para asegurar consistencia
+            initSlider();
+        }
+
         // Configuración de Imágenes
         const TOTAL_SLIDES = 6;
         let currentOS = 'ios';
@@ -294,7 +348,6 @@
         const track = document.getElementById('carouselTrack');
         const dotsContainer = document.getElementById('carouselDots');
         
-        // Inicializar el slider
         function initSlider() {
             renderSlides();
             renderDots();
@@ -302,79 +355,52 @@
             startAutoPlay();
         }
 
-        // Renderizar las imágenes al HTML (ej: assets/images/ios/1.jpg)
         function renderSlides() {
             track.innerHTML = '';
             for(let i = 1; i <= TOTAL_SLIDES; i++) {
                 const slide = document.createElement('div');
                 slide.className = 'carousel-slide';
-                // Volvimos a .png ya que el peso está optimizado
-                slide.innerHTML = `<img src="assets/images/${currentOS}/${i}.png" alt="${currentOS} screenshot ${i}" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiMzMyMiLz48dGV4dCB4PSI1MCUiIHk9IjUwJSIgZmlsbD0iI2ZmZiIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjQiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkltYWdlbiAke2l9ICgke2N1cnJlbnRPUy50b1VwcGVyQ2FzZSgpfSk8L3RleHQ+PC9zdmc+'">`;
+                slide.innerHTML = `<img src="assets/images/${currentOS}/${i}.png" alt="${currentOS} ${i}">`;
                 track.appendChild(slide);
             }
         }
 
-        // Renderizar los puntitos inferiores
         function renderDots() {
             dotsContainer.innerHTML = '';
             for(let i = 0; i < TOTAL_SLIDES; i++) {
                 const dot = document.createElement('div');
                 dot.className = 'dot';
-                dot.onclick = () => {
-                    goToSlide(i);
-                    resetAutoPlay(); // Reiniciar el contador si el usuario hace clic manually
-                };
+                dot.onclick = () => { goToSlide(i); startAutoPlay(); };
                 dotsContainer.appendChild(dot);
             }
         }
 
-        // Cambiar entre iOS / Android
         function switchOS(os) {
             if (currentOS === os) return;
             currentOS = os;
-            
-            // Actualizar clases de botones
             document.querySelectorAll('.os-tab').forEach(tab => {
-                tab.classList.remove('active');
-                if(tab.innerText.toLowerCase() === os) {
-                    tab.classList.add('active');
-                }
+                tab.classList.toggle('active', tab.innerText.toLowerCase() === os);
             });
-
-            // Reiniciar con las nuevas imágenes
             initSlider();
         }
 
-        // Mover a una diapositiva específica
         function goToSlide(index) {
             currentIndex = index;
             track.style.transform = `translateX(-${currentIndex * 100}%)`;
-            
-            // Actualizar puntitos
             const dots = document.querySelectorAll('.dot');
-            dots.forEach(d => d.classList.remove('active'));
-            if(dots[currentIndex]) {
-                dots[currentIndex].classList.add('active');
-            }
+            dots.forEach((d, i) => d.classList.toggle('active', i === currentIndex));
         }
 
-        // Avanzar automáticamente
         function startAutoPlay() {
             clearInterval(autoPlayInterval);
             autoPlayInterval = setInterval(() => {
-                let nextIndex = currentIndex + 1;
-                if (nextIndex >= TOTAL_SLIDES) nextIndex = 0;
-                goToSlide(nextIndex);
-            }, 3000); // 3 segundos (cambiado a 3 para que rinda más la lectura)
+                goToSlide((currentIndex + 1) % TOTAL_SLIDES);
+            }, 3000);
         }
 
-        // Reiniciar el timer cuando el usuario interactúa
-        function resetAutoPlay() {
-            startAutoPlay();
-        }
-
-        // Arrancar al cargar la página
-        window.onload = initSlider;
+        window.onload = () => {
+            initLanguage();
+        };
     </script>
 </body>
 </html>
